@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<p id="demo"></p>
+
+<button type="button" onclick='
+result = a + b;
+window.alert(result)
+document.getElementById("demo").innerHTML = "what is " + a + "+" + b + "?";
+'>alert</button>
+
+<button type="button" onclick='
+a += 10;
+'>a + 10</button>
+
+<button type="button" onclick='
+b += 10;
+'>b + 10</button>
+
+<script type="text/javascript">
+
+var a = 0;
+var b = 0;
+
+var result = a + b;
+
+document.getElementById("demo").innerHTML = "what is " + a + "+" + b + "?";
+</script>
+
+</body>
+</html>
