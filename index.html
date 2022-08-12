@@ -1,4 +1,32 @@
 <!DOCTYPE html>
+
+<style type="text/css">
+	.alert-button {
+		background-color: black;
+
+		color: white;
+
+		width: 100px;
+		height: 60px;
+
+		border: none;
+		border-radius: 30px;
+
+		cursor: pointer;
+
+		transition: opacity 0.3s;
+	}
+
+	.alert-button:hover {
+		opacity: 0.7;
+	}
+
+	.alert-button:active {
+		transition: opacity 0.1s;
+		opacity: 0.5;
+	}
+</style>
+
 <html>
 <body>
 
@@ -7,7 +35,7 @@
 
 <p id="demo"></p>
 
-<button type="button" onclick='
+<button class="alert-button" type="button" onclick='
 result = a + b;
 window.alert(result)
 demo.innerHTML = "what is " + a + "+" + b + "?";
