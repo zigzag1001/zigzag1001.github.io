@@ -38,7 +38,7 @@
 	}
 
 	function newGif(){
-		return JSON.parse(httpGet("http://api.giphy.com/v1/gifs/random?api_key=9f6Ic6dYSZ54RAMIdCDrY64L2WbpqbFo&rating=r&tag=anime")).data.images.original.url;
+		return JSON.parse(httpGet("https://api.giphy.com/v1/gifs/random?api_key=9f6Ic6dYSZ54RAMIdCDrY64L2WbpqbFo&rating=r&tag=anime")).data.images.original.url;
 	}
 
 	document.getElementById("imgThing").src = newGif();
