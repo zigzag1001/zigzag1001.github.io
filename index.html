@@ -1,130 +1,137 @@
 <!DOCTYPE html>
-
-<style type="text/css">
-	* {
-		margin: 0px;
-		padding: 0px;
-		box-sizing: border-box;
-	}
-
-	body {
-		background-color: black;
-		color: white;
-	}
-
-	img {
-		position: absolute;
-		bottom: 0px;
-		right: 10px;
-	}
-
-	button {
-		position: relative;
-		background-color: rgba(200,200,200,0.4);
-		color: rgba(20,20,20,0.7);
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-
-		font-size: 20px;
-
-		padding-left: 40px;
-		padding-right: 40px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-
-		margin-left: 10px;
-		margin-right: 10px;
-		margin-top: 10px;
-
-		box-shadow: 0 9px rgba(0,0,0,0.5);
-
-		top: 40px;
-		left: 50px;
-
-		transition: background-color 0.2s;
-	}
-
-	button:hover {
-		background-color: rgba(200,200,200,0.9);
-		box-shadow: 0 9px rgba(0,0,0,0.6);
-	}
-
-	button:active {
-		box-shadow: 0 5px rgba(0,0,0,0.8);
-		transform: translateY(4px);
-	}
-
-	.backgroundImg {
-		position: fixed;
-		min-width: 100%;
-		min-height: 100%;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-
-		filter: blur(13px);
-	}
-
-	.textThing {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-
-		font-size: 30px;
-
-		text-shadow: 0 2px rgba(0,0,0,0.8);
-		transition: font-size 1s;
-	}
-
-	.textThing:hover {
-		font-size: 35px;
-		cursor: none;
-	}
-
-</style>
-
-
 <html>
-	<head></head>
+	<head>
+		<title>Big test!</title>
+		<link id="icon" rel="icon" href=media/icon.gif>
+
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: black;
+				color: white;
+			}
+
+			img {
+				position: absolute;
+				bottom: 0px;
+				right: 10px;
+			}
+
+			button {
+				position: relative;
+				background-color: rgba(200,200,200,0.4);
+				color: rgba(20,20,20,0.7);
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+
+				font-size: 20px;
+
+				padding-left: 40px;
+				padding-right: 40px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+
+				margin-left: 10px;
+				margin-right: 10px;
+				margin-top: 10px;
+
+				box-shadow: 0 9px rgba(0,0,0,0.5);
+
+				top: 40px;
+				left: 50px;
+
+				transition: background-color 0.2s;
+			}
+
+			button:hover {
+				background-color: rgba(200,200,200,0.9);
+				box-shadow: 0 9px rgba(0,0,0,0.6);
+			}
+
+			button:active {
+				box-shadow: 0 5px rgba(0,0,0,0.8);
+				transform: translateY(4px);
+			}
+
+			.backgroundImg {
+				position: fixed;
+				min-width: 100%;
+				min-height: 100%;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+
+				filter: blur(13px);
+			}
+
+			.textThing {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+
+				font-size: 30px;
+
+				text-shadow: 0 2px rgba(0,0,0,0.8);
+				transition: font-size 1s;
+			}
+
+			.textThing:hover {
+				font-size: 35px;
+				cursor: none;
+			}
+
+		</style>
+	</head>
+
 	<body>
 
 		<img class="backgroundImg" id="backgroundImg" src=gif>
 
 		<button class="topButton_1" onclick='
 			document.getElementById("backgroundImg").src = newGifL(1);
+			document.getElementById("icon").href = "media/icon.gif";
+			document.getElementById("bottomIcon").src = "media/icon.gif";
 		'>Theme 1</button>
 		<button class="topButton_2" onclick='
 			document.getElementById("backgroundImg").src = newGifL(2);
 		'>Theme 2</button>
 		<button class="topButton_3" onclick='
 			document.getElementById("backgroundImg").src = newGifL(3);
+			document.getElementById("icon").href = "media/icon3.gif";
+			document.getElementById("bottomIcon").src = "media/icon3.gif";
 		'>Theme 3</button>
 
 		<div class="textThing">Big test here wowo look!</div>
 
 		<a href="https://zigzag1001.tk/">
-			<img src="media/party-girl.gif">
+			<img id="bottomIcon" src="media/icon.gif" style="transform: scaleX(-1)">
 		</a>
 
 	</body>
+
+
+
+	<script type="text/javascript" src='scripts/newGifL.js'></script>
+	<script type="text/javascript">
+		var bg = 3;
+		function httpGet(theUrl){
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("GET", theUrl, false);
+			xmlHttp.send(null);
+			return xmlHttp.responseText;
+		}
+
+		function newGif(){
+			return JSON.parse(httpGet("https://api.giphy.com/v1/gifs/random?api_key=9f6Ic6dYSZ54RAMIdCDrY64L2WbpqbFo&tag=cute-anime")).data.images.original.url;
+		}
+
+		document.getElementById("backgroundImg").src = newGifL(1);
+	</script>
 </html>
-
-
-<script type="text/javascript" src='scripts/newGifL.js'></script>
-<script type="text/javascript">
-	var bg = 3;
-	function httpGet(theUrl){
-		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("GET", theUrl, false);
-		xmlHttp.send(null);
-		return xmlHttp.responseText;
-	}
-
-	function newGif(){
-		return JSON.parse(httpGet("https://api.giphy.com/v1/gifs/random?api_key=9f6Ic6dYSZ54RAMIdCDrY64L2WbpqbFo&tag=cute-anime")).data.images.original.url;
-	}
-
-	document.getElementById("backgroundImg").src = newGifL(2);
-</script>
