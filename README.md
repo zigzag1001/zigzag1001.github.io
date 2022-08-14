@@ -3,8 +3,6 @@ test for html also github pages
 
 # TODO
 
-- blur
-
 - content
 
 - add icon (gif?)
