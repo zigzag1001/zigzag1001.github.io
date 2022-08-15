@@ -89,7 +89,7 @@
 		</style>
 	</head>
 
-	<body>
+	<body id="body">
 
 		<img class="backgroundImg" id="backgroundImg" src=gif onclick='
 			var audio = document.getElementById("backgroundAud");
@@ -131,16 +131,8 @@
 
 	<script type="text/javascript" src='scripts/newGifL.js'></script>
 	<script type="text/javascript">
-		var bg = 3;
-		function httpGet(theUrl){
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.open("GET", theUrl, false);
-			xmlHttp.send(null);
-			return xmlHttp.responseText;
-		}
-
-		function newGif(){
-			return JSON.parse(httpGet("https://api.giphy.com/v1/gifs/random?api_key=9f6Ic6dYSZ54RAMIdCDrY64L2WbpqbFo&tag=cute-anime")).data.images.original.url;
+		function isMobile() {
+			return /android|iphone|kindle|ipad/i.test(navigator.userAgent);
 		}
 
 		document.getElementById("backgroundAud").volume = 0.5;
