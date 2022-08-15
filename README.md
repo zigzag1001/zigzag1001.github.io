@@ -5,8 +5,8 @@ test for html also github pages
 
 - content
 
-- add icon (gif?)
-
-- add title
-
 - add links (fancy buttons)
+
+- add more pages
+
+- css file
