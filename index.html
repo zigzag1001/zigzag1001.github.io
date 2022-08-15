@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Big test!</title>
-		<link id="icon" rel="icon" href=media/icon.gif>
+		<link id="icon" rel="icon" href=https://zigzag1001.tk/media/icon.gif>
 
 		<style type="text/css">
 			* {
@@ -25,37 +25,26 @@
 				position: relative;
 				background-color: rgba(200,200,200,0.4);
 				color: rgba(20,20,20,0.7);
-				border: none;
+				border: outset;
 				border-radius: 4px;
 				cursor: pointer;
 
 				font-size: 20px;
 
-				padding-left: 2%;
-				padding-right: 2%;
-				padding-top: 0.5%;
-				padding-bottom: 0.5%;
+				box-shadow: 5px 7px rgba(0,0,0,0.5);
 
-				margin-left: 10px;
-				margin-right: 10px;
-				margin-top: 10px;
-
-				box-shadow: 0 9px rgba(0,0,0,0.5);
-
-				top: 40px;
-				left: 50px;
-
-				transition: background-color 0.2s;
+				transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
 			}
 
 			button:hover {
 				background-color: rgba(200,200,200,0.9);
-				box-shadow: 0 9px rgba(0,0,0,0.6);
+				box-shadow: 5px 7px rgba(0,0,0,0.6);
 			}
 
 			button:active {
-				box-shadow: 0 5px rgba(0,0,0,0.8);
-				transform: translateY(4px);
+				box-shadow: 5px 7px rgba(0,0,0,0.8);
+				box-shadow: none;
+				transform: translate(5px, 7px);
 			}
 
 			.backgroundImg {
@@ -67,6 +56,45 @@
 				overflow: hidden;
 
 				filter: blur(13px);
+			}
+
+			.topBar {
+				position: fixed;
+				width: 100%;
+				height: 6.5%;
+				/*background-color: rgba(150,150,150,0.6);*/
+			}
+
+			.topButtons {
+				left: 16%;
+				padding-left: 4%;
+				padding-right: 4%;
+				padding-top: 0.1%;
+				padding-bottom: 0.1%;
+
+				margin-left: 6%;
+				margin-right: 6%;
+				margin-top: 0.5%;
+			}
+
+			.leftButtonsContainer {
+				position: fixed;
+				left: 0px;
+				top: 50%;
+				width: 15%;
+				transform: translateY(-50%);
+				/*background-color: rgba(150,150,150,0.6);*/
+			}
+
+			.leftButtons {
+				padding-left: 20%;
+				padding-right: 20%;
+				padding-top: 0.9%;
+				padding-bottom: 0.9%;
+
+				margin-left: 10%;
+				margin-top: 40%;
+				margin-bottom: 40%;
 			}
 
 			.textThing {
@@ -101,24 +129,34 @@
 			}
 			'>
 
-		<button class="topButton_1" onclick='
-			document.getElementById("backgroundImg").src = newGifL(1);
-			document.getElementById("icon").href = "media/icon.gif";
-			document.getElementById("bottomIcon").src = "media/icon.gif";
-		'>Theme 1</button>
-		<button class="topButton_2" onclick='
-			document.getElementById("backgroundImg").src = newGifL(2);
-		'>Theme 2</button>
-		<button class="topButton_3" onclick='
-			document.getElementById("backgroundImg").src = newGifL(3);
-			document.getElementById("icon").href = "media/icon3.gif";
-			document.getElementById("bottomIcon").src = "media/icon3.gif";
-		'>Theme 3</button>
+		<div class="topBar">
+			<a href="https://zigzag1001.tk/plain"><button class="topButtons">Plain</button></a>
+			<button class="topButtons">Helo</button>
+			<button class="topButtons">Helo</button>
+		</div>
+
+		<div class="leftButtonsContainer">
+
+			<button class="leftButtons" onclick='
+				document.getElementById("backgroundImg").src = newGifL(1);
+				document.getElementById("icon").href = "https://zigzag1001.tk/media/icon.gif";
+				document.getElementById("bottomIcon").src = "https://zigzag1001.tk/media/icon.gif";
+			'>Theme 1</button>
+			<button class="leftButtons" onclick='
+				document.getElementById("backgroundImg").src = newGifL(2);
+			'>Theme 2</button>
+			<button class="leftButtons" onclick='
+				document.getElementById("backgroundImg").src = newGifL(3);
+				document.getElementById("icon").href = "https://zigzag1001.tk/media/icon3.gif";
+				document.getElementById("bottomIcon").src = "https://zigzag1001.tk/media/icon3.gif";
+			'>Theme 3</button>
+
+		</div>
 
 		<div class="textThing">Big test here wowo look!</div>
 
 		<a href="https://zigzag1001.tk/">
-			<img id="bottomIcon" src="media/icon.gif" style="transform: scaleX(-1); right: 10px;">
+			<img id="bottomIcon" src="https://zigzag1001.tk/media/icon.gif" style="transform: scaleX(-1); right: 10px;">
 		</a>
 
 		<audio id="backgroundAud">
@@ -129,7 +167,7 @@
 
 
 
-	<script type="text/javascript" src='scripts/newGifL.js'></script>
+	<script type="text/javascript" src='https://zigzag1001.tk/scripts/newGifL.js'></script>
 	<script type="text/javascript">
 		function isMobile() {
 			return /android|iphone|kindle|ipad/i.test(navigator.userAgent);
