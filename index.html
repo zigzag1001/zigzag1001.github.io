@@ -3,43 +3,47 @@
 	<head>
 		<title>Big test!</title>
 		<link id="icon" rel="icon" href=https://zigzag1001.tk/media/icon.gif>
-		<link rel="stylesheet" type="text/css" href="https://zigzag1001.tk/style.css">
+		<!-- <link rel="stylesheet" type="text/css" href="https://zigzag1001.tk/style.css"> -->
 		<link rel="stylesheet" type="text/css" href="http://10.0.1.22:8000/style.css">
 	</head>
 
 	<body id="body">
 
 		<img class="backgroundImg" id="backgroundImg" src=gif onclick='
-			var audio = document.getElementById("backgroundAud");
-			if (audio.paused) {
-				audio.play();
-			}
-			else {
-				audio.pause();
-			}
+			document.getElementById("backgroundImg").src = newGifL(theme);
+			document.getElementById("keySound").play();
 			'>
 
 		<div class="topBar">
-			<a href="https://zigzag1001.tk/plain" target="_blank"><button class="topButtons">Plain</button></a>
-			<button class="topButtons">Helo</button>
-			<button class="topButtons">Helo</button>
+			<button class="topButtons" onclick='
+				theme = 1;
+				document.getElementById("backgroundImg").src = newGifL(theme);
+				document.getElementById("icon").href = "https://zigzag1001.tk/media/icon.gif";
+				document.getElementById("bottomIcon").src = "https://zigzag1001.tk/media/icon.gif";
+			'>Theme 1</button>
+			<button class="topButtons" onclick='
+				theme = 2;
+				document.getElementById("backgroundImg").src = newGifL(theme);
+			'>Theme 2</button>
+			<button class="topButtons" onclick='
+				theme = 3;
+				document.getElementById("backgroundImg").src = newGifL(theme);
+				document.getElementById("icon").href = "https://zigzag1001.tk/media/icon3.gif";
+				document.getElementById("bottomIcon").src = "https://zigzag1001.tk/media/icon3.gif";
+			'>Theme 3</button>
+		</div>
+
+		<div class="bottomBar">
+			<a href="https://zigzag1001.tk/plain" target="_blank"><button class="bottomButtons">Plain</button></a>
+			<button class="bottomButtons">Helo</button>
+			<button class="bottomButtons">Helo</button>
 		</div>
 
 		<div class="leftButtonsContainer">
 
-			<button class="leftButtons" onclick='
-				document.getElementById("backgroundImg").src = newGifL(1);
-				document.getElementById("icon").href = "https://zigzag1001.tk/media/icon.gif";
-				document.getElementById("bottomIcon").src = "https://zigzag1001.tk/media/icon.gif";
-			'>Theme 1</button>
-			<button class="leftButtons" onclick='
-				document.getElementById("backgroundImg").src = newGifL(2);
-			'>Theme 2</button>
-			<button class="leftButtons" onclick='
-				document.getElementById("backgroundImg").src = newGifL(3);
-				document.getElementById("icon").href = "https://zigzag1001.tk/media/icon3.gif";
-				document.getElementById("bottomIcon").src = "https://zigzag1001.tk/media/icon3.gif";
-			'>Theme 3</button>
+			<a href="https://zigzag1001.tk/plain" target="_blank"><button class="leftButtons">Plain</button></a>
+			<button class="leftButtons">Helo</button>
+			<button class="leftButtons">Helo</button>
 
 		</div>
 
@@ -49,9 +53,7 @@
 			<img id="bottomIcon" src="https://zigzag1001.tk/media/icon.gif" style="transform: scaleX(-1); right: 10px;bottom: 0px;">
 		</a>
 
-		<audio id="backgroundAud">
-			<source src="media/peace.mp3" type="audio/mp3">
-		</audio>
+		<audio id='keySound' src="https://zigzag1001.tk/media/key.mp3"></audio>
 
 	</body>
 
@@ -62,8 +64,7 @@
 		function isMobile() {
 			return /android|iphone|kindle|ipad/i.test(navigator.userAgent);
 		}
-
-		document.getElementById("backgroundAud").volume = 0.5;
+		var theme = 1;
 
 		document.getElementById("backgroundImg").src = newGifL(1);
 	</script>
