@@ -54,7 +54,7 @@ button:active {
 }
 
 .backgroundImg:active {
-	filter: blur(13px) opacity(0.95);
+	filter: blur(13px) opacity(0.92);
 }
 
 .topBar {
