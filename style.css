@@ -11,6 +11,7 @@ body {
 
 img {
 	position: absolute;
+	bottom: 0px;
 }
 
 button {
@@ -48,6 +49,12 @@ button:active {
 	overflow: hidden;
 
 	filter: blur(13px);
+
+	transition: filter 0.1s;
+}
+
+.backgroundImg:active {
+	filter: blur(13px) opacity(0.95);
 }
 
 .topBar {
