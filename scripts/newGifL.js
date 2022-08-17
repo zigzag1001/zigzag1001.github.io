@@ -54,6 +54,6 @@ function newGifL(theme){
 }
 
 function copyText(textId) {
-	navigator.clipboard.writeText(document.getElementById('textId'));
-	document.getElementById('mcIpCopyButton') = "Copied!";
+	navigator.clipboard.writeText(document.getElementById('textId').value);
+	document.getElementById('mcIpCopyButton').value = "Copied!";
 }
