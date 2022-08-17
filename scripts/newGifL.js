@@ -54,10 +54,5 @@ function newGifL(theme){
 }
 
 function copyText(textId) {
-	var text = document.getElementById(textId);
-
-	text.select();
-	text.setSelectionRange(0,99999);
-
-	navigator.clipboard.writeText(text.value);
+	navigator.clipboard.writeText(document.getElementById(textId));
 }
