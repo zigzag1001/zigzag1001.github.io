@@ -15,15 +15,21 @@
 
 		<div style="position: fixed; left: 48.5%; top: 15%"><h1 style="font-size: 100px; font-family: 'Lucida Console', 'Courier New', monospace; font-weight: bold; color: rgba(20,20,20,0.7); text-shadow: 0 2px rgba(0,0,0,0.8);">IP:</h1></div>
 
-		<div style="position: fixed; left: 50%; bottom: 40%; transform: translate(-50%, -50%);">
+		<div style="position: fixed; left: 51.5%; bottom: 30%; transform: translate(-50%, -50%);background-color: rgba(200,200,200,0.4);">
 
-			<button id="mcServerIp" onclick="copyText('mcServerIp')" style="
+			<textarea disabled id="mcServerIp" onclick="copyText('mcServerIp')" style="
+				position: relative;
 				font-size: 60px;
-				padding-top: 5%;
-				padding-bottom: 5%;
+				padding-top: 7%;
 				padding-right: 10%;
 				padding-left: 10%;
-			">mc.zigzag1001.tk</button>
+				background: transparent;
+				border: none;
+				resize: none;
+				color: rgba(20,20,20,0.7);
+			">mc.zigzag1001.tk</textarea>
+
+			<button id='mcIpCopyButton' style='position: absolute; width: 50%; height: 50%; box-shadow: none; transform: translate(50%, 25%)' onclick="copyText('mcServerIp')">Copy!</button>
 
 		</div>
 
