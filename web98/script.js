@@ -4,69 +4,139 @@ let count = 0;
 const winnum = 50;
 var body = document.body;
 let maxz = 50;
-function randwin() {
-	var mainwin = document.querySelector('.mainwin');
-	// var div = document.createElement('div');
-	var div = mainwin.appendChild(document.createElement('div'));
-	div.className = 'randwin window animate__animated animate__' + intro;
 
-	var titlebar = div.appendChild(document.createElement('div'));
+// returns empty window element
+// opts: title, body, width, className
+function createWindow(opts = {}) {
+	var window_ = document.createElement('div');
+	if (opts.className) {
+		window_.className = opts.className;
+	} else {
+		window_.className = 'window animate__animated animate__' + intro;
+	}
+
+	var titlebar = window_.appendChild(document.createElement('div'));
 	titlebar.className = 'title-bar';
 
 	var titlebartext = titlebar.appendChild(document.createElement('div'));
 	titlebartext.className = 'title-bar-text';
-	titlebartext.textContent = 'AAAAAAAAaaaaa';
+	if (opts.title) {
+		titlebartext.textContent = opts.title;
+	} else {
+		titlebartext.textContent = 'Warning';
+	}
 
 	var titlebarcontrols = titlebar.appendChild(document.createElement('div'));
-	titlebarcontrols.className = 'title-bar-controls';
-	titlebarcontrols.appendChild(document.createElement('button')).ariaLabel = 'Minimize';
-	titlebarcontrols.appendChild(document.createElement('button')).ariaLabel = 'Maximize';
+	var minbutton = titlebarcontrols.appendChild(document.createElement('button'));
+	var maxbutton = titlebarcontrols.appendChild(document.createElement('button'));
 	var closebutton = titlebarcontrols.appendChild(document.createElement('button'));
+	titlebarcontrols.className = 'title-bar-controls';
+	minbutton.ariaLabel = 'Minimize';
+	maxbutton.ariaLabel = 'Maximize';
 	closebutton.ariaLabel = 'Close';
+	minbutton.onclick = function() {
+		closeCurrentWindow(window_);
+	}
 	closebutton.onclick = function() {
-		closeCurrentWindow(div);
+		closeCurrentWindow(window_);
 	}
 
-	var windowbody = div.appendChild(document.createElement('div'));
+	if (opts.body) {
+		window_.appendChild(opts.body);
+	}
+
+	if (opts.width) {
+		window_.style.width = opts.width;
+	} else {
+		window_.style.width = '250px';
+	}
+
+	window_.style.margin = '32px';
+
+	handleDragging(window_);
+
+	return window_;
+}
+
+function addWindow(win) {
+	body.appendChild(win);
+}
+
+function simplebody(text) {
+	var windowbody = document.createElement('div');
 	windowbody.className = 'window-body';
+	windowbody.appendChild(document.createElement('p')).textContent = text;
 
-	windowbody.appendChild(document.createElement('p')).textContent = 'AAAAAAAAaaaaa';
+	windowbody.appendChild(document.createElement('button')).textContent = 'OK';
 
-	var winbodysection = windowbody.appendChild(document.createElement('section'));
-	winbodysection.className = 'field-row';
-	winbodysection.style.justifyContent = 'flex-end';
-
-	winbodysection.appendChild(document.createElement('button')).textContent = 'OK';
-	var cancelbutton = winbodysection.appendChild(document.createElement('button'));
+	var cancelbutton = windowbody.appendChild(document.createElement('button'));
 	cancelbutton.textContent = 'Cancel';
 	cancelbutton.onclick = function() {
-		closeCurrentWindow(div);
+		removeWindow(windowbody.closest('.window'));
 	}
+
+	return windowbody;
+}
+
+function randwin() {
+	var windowbody = simplebody('AAAAAAAAaaaaa');
+
+	var div = createWindow({ body: windowbody });
+
+	div.classList.add('randwin');
 
 	div.onmouseover = function() {
 		closeCurrentWindow(div);
 	};
 
-	div.style.position = 'absolute';
 	div.style.left = Math.random() * 90 + '%';
 	div.style.top = Math.random() * 90 + '%';
-	div.style.width = '250px';
-	div.style.margin = '32px';
-	// div.style.width = Math.random() * 200 + 100 + 'px';
-	// div.style.height = Math.random() * 200 + 50 + 'px';
-	// div.style.backgroundColor = 'rgb(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + ')';
-	body.appendChild(div);
-	handleDragging(div);
+
+	addWindow(div);
+
 	setTimeout(() => {
 		div.classList.remove('animate__' + intro);
 	}, 1000);
+}
+
+// custom window
+function customWin() {
+	var windowbody = document.createElement('div');
+	windowbody.className = 'window-body';
+
+	var form = windowbody.appendChild(document.createElement('div'));
+	form.style.display = 'flex';
+	form.style.flexDirection = 'column';
+	var in_winname = form.appendChild(document.createElement('input'));
+	var in_winwidth = form.appendChild(document.createElement('input'));
+	var in_winbody = form.appendChild(document.createElement('textarea'));
+	var submit = form.appendChild(document.createElement('button'));
+	in_winname.style.padding = '5px';
+	in_winname.placeholder = 'Window Title';
+	in_winwidth.placeholder = 'Window Width';
+	in_winwidth.style.padding = '5px';
+	in_winbody.placeholder = 'Window Body';
+	in_winbody.style.padding = '5px';
+	submit.textContent = 'Submit';
+	submit.onclick = function() {
+		console.log(in_winname.value, in_winwidth.value, in_winbody.value);
+		var div = createWindow({
+			title: in_winname.value,
+			width: in_winwidth.value,
+			body: simplebody(in_winbody.value)
+		});
+		addWindow(div);
+		removeWindow(windowbody.closest('.window'));
+	}
+
+	addWindow(createWindow({ body: windowbody }));
 }
 
 // Fancy window removal
 function removeWindow(win) {
 	win.classList.add('animate__' + outro);
 	setTimeout(() => {
-		body.removeChild(win);
+		win.parentNode.removeChild(win);
 		count--;
 	}, 1000);
 }
