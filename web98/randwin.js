@@ -62,6 +62,7 @@ function randwin() {
 	}, 1000);
 }
 
+// Fancy window removal
 function removeWindow(win) {
 	win.classList.add('animate__' + outro);
 	setTimeout(() => {
@@ -70,6 +71,8 @@ function removeWindow(win) {
 	}, 1000);
 }
 
+// general window hider, removes randwin
+// accepts elements inside the window
 function closeCurrentWindow(win) {
 	if (!win.classList.contains('window')) {
 		win = win.closest('.window');
@@ -82,7 +85,8 @@ function closeCurrentWindow(win) {
 	}
 }
 
-function fillWindows() {
+// fill the screen with random windows
+function fillRandWin() {
 	const interval = setInterval(() => {
 		randwin();
 		count++;
@@ -92,7 +96,9 @@ function fillWindows() {
 	}, 10);
 };
 
-function clearWindows() {
+// clear all random windows
+// and hide control window
+function clearRandWin() {
 	const interval = setInterval(() => {
 		let win = document.querySelector('.randwin');
 		body.removeChild(win);
@@ -101,12 +107,13 @@ function clearWindows() {
 			clearInterval(interval);
 		}
 	}, 5);
-	document.querySelector('.coolwins').style.display = 'none';
+	document.querySelector('.randwins').style.display = 'none';
 }
 
+// show hidden windows
 function showall() {
 	document.querySelector('.mainwin').style.display = 'block';
-	document.querySelector('.coolwins').style.display = 'block';
+	document.querySelector('.randwins').style.display = 'block';
 }
 
 // MOVEABLE WINDOWS
