@@ -4,8 +4,9 @@ let count = 0;
 const winnum = 50;
 var body = document.body;
 let maxz = 50;
+let removing = false;
 
-// returns empty window element
+// returns window element
 // opts: title, body, width, className
 function createWindow(opts = {}) {
 	var window_ = document.createElement('div');
@@ -35,14 +36,16 @@ function createWindow(opts = {}) {
 	maxbutton.ariaLabel = 'Maximize';
 	closebutton.ariaLabel = 'Close';
 	minbutton.onclick = function() {
-		closeCurrentWindow(window_);
+		removeWindow(window_);
 	}
 	closebutton.onclick = function() {
-		closeCurrentWindow(window_);
+		removeWindow(window_);
 	}
 
 	if (opts.body) {
 		window_.appendChild(opts.body);
+	} else {
+		window_.appendChild(simplebody('This is a warning message.'));
 	}
 
 	if (opts.width) {
@@ -58,11 +61,21 @@ function createWindow(opts = {}) {
 	return window_;
 }
 
-function addWindow(win) {
+function addWindow(win, x = 0, y = 0) {
+	if (x == 0 && y == 0) {
+		x = Math.floor(Math.random() * (window.innerWidth - 500));
+		y = Math.floor(Math.random() * (window.innerHeight - 240));
+	}
+	win.style.zIndex = maxz++;
+	win.style.left = x + 'px';
+	win.style.top = y + 'px';
 	body.appendChild(win);
 }
 
 function simplebody(text) {
+	if (text == "") {
+		text = 'This is a warning message.';
+	}
 	var windowbody = document.createElement('div');
 	windowbody.className = 'window-body';
 	windowbody.appendChild(document.createElement('p')).textContent = text;
@@ -86,13 +99,19 @@ function randwin() {
 	div.classList.add('randwin');
 
 	div.onmouseover = function() {
-		closeCurrentWindow(div);
+		// closeCurrentWindow(div);
+		removeWindow(div);
 	};
 
-	div.style.left = Math.random() * 90 + '%';
-	div.style.top = Math.random() * 90 + '%';
+	let screenWidth = window.innerWidth;
+	let screenHeight = window.innerHeight;
+	let winWidth = 256;
+	let winHeight = 240;
 
-	addWindow(div);
+	let x = Math.floor(Math.random() * (screenWidth - winWidth));
+	let y = Math.floor(Math.random() * (screenHeight - winHeight));
+
+	addWindow(div, x, y);
 
 	setTimeout(() => {
 		div.classList.remove('animate__' + intro);
@@ -108,59 +127,43 @@ function customWin() {
 	form.style.display = 'flex';
 	form.style.flexDirection = 'column';
 	var in_winname = form.appendChild(document.createElement('input'));
-	var in_winwidth = form.appendChild(document.createElement('input'));
 	var in_winbody = form.appendChild(document.createElement('textarea'));
 	var submit = form.appendChild(document.createElement('button'));
 	in_winname.style.padding = '5px';
 	in_winname.placeholder = 'Window Title';
-	in_winwidth.placeholder = 'Window Width';
-	in_winwidth.style.padding = '5px';
 	in_winbody.placeholder = 'Window Body';
 	in_winbody.style.padding = '5px';
 	submit.textContent = 'Submit';
 	submit.onclick = function() {
-		console.log(in_winname.value, in_winwidth.value, in_winbody.value);
 		var div = createWindow({
 			title: in_winname.value,
-			width: in_winwidth.value,
 			body: simplebody(in_winbody.value)
 		});
-		addWindow(div);
+		var currentwindow = windowbody.closest('.window');
+		var x = currentwindow.getBoundingClientRect().left + parseInt(currentwindow.style.margin.substring(0, currentwindow.style.margin.length - 2));
+		var y = currentwindow.getBoundingClientRect().top + parseInt(currentwindow.style.margin.substring(0, currentwindow.style.margin.length - 2));
+		addWindow(div, x, y);
 		removeWindow(windowbody.closest('.window'));
 	}
 
-	addWindow(createWindow({ body: windowbody }));
+	addWindow(createWindow({ body: windowbody, title: 'Create Custom Window' }));
 }
 
 // Fancy window removal
 function removeWindow(win) {
 	win.classList.add('animate__' + outro);
 	setTimeout(() => {
-		win.parentNode.removeChild(win);
-		count--;
+		win.remove();
 	}, 1000);
-}
-
-// general window hider, removes randwin
-// accepts elements inside the window
-function closeCurrentWindow(win) {
-	if (!win.classList.contains('window')) {
-		win = win.closest('.window');
-	}
-	if (win.classList.contains('randwin')) {
-		removeWindow(win);
-	}
-	else {
-		win.style.display = 'none';
-	}
 }
 
 // fill the screen with random windows
 function fillRandWin() {
+	if (removing) return;
 	const interval = setInterval(() => {
 		randwin();
 		count++;
-		if (count > winnum) {
+		if (count >= winnum) {
 			clearInterval(interval);
 		}
 	}, 10);
@@ -168,22 +171,20 @@ function fillRandWin() {
 
 // clear all random windows
 // and hide control window
-function clearRandWin() {
-	const interval = setInterval(() => {
-		let win = document.querySelector('.randwin');
-		body.removeChild(win);
-		count--;
-		if (count < 1) {
-			clearInterval(interval);
-		}
-	}, 5);
-	document.querySelector('.randwins').style.display = 'none';
+function clearWins(classname, except = 'norem') {
+	if (removing) return;
+	removing = true;
+	count = 0;
+	var targets = document.querySelectorAll('.' + classname);
+	targets.forEach((target) => {
+		if (target.classList.contains(except)) return;
+		removeWindow(target);
+	});
+	removing = false;
 }
 
-// show hidden windows
-function showall() {
-	document.querySelector('.mainwin').style.display = 'block';
-	document.querySelector('.randwins').style.display = 'block';
+function closeAll() {
+	clearWins('window');
 }
 
 // MOVEABLE WINDOWS
@@ -191,14 +192,16 @@ function showall() {
 function handleDragging(item) {
 	let offsetX, offsetY, isDragging = false;
 	item.style.position = 'absolute';
-	item.querySelector('.title-bar').style.cursor = 'move';
+	// item.querySelector('.title-bar').style.cursor = 'move';
+	item.querySelector('.title-bar-text').style.cursor = 'default';
 	item.addEventListener('mousedown', (e) => {
 		item.style.zIndex = maxz++;
 		if (e.target.classList.contains('title-bar-controls')) return;
-		if (e.target.classList.contains('title-bar')) {
+		if (e.target.classList.contains('title-bar') || e.target.classList.contains('title-bar-text')) {
 			e.preventDefault();
-			offsetX = e.clientX + 32 - item.getBoundingClientRect().left;
-			offsetY = e.clientY + 32 - item.getBoundingClientRect().top;
+			let margin = parseInt(item.style.margin.substring(0, item.style.margin.length - 2));
+			offsetX = e.clientX + margin - item.getBoundingClientRect().left;
+			offsetY = e.clientY + margin - item.getBoundingClientRect().top;
 			isDragging = true;
 		}
 	});
