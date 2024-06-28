@@ -1,7 +1,7 @@
 const intro = 'bounceInUp';
 const outro = 'bounceOutRight';
 let count = 0;
-const winnum = 50;
+var winnum = 50;
 var body = document.body;
 let maxz = 50;
 let removing = false;
@@ -70,6 +70,9 @@ function addWindow(win, x = 0, y = 0) {
 	win.style.left = x + 'px';
 	win.style.top = y + 'px';
 	body.appendChild(win);
+	setTimeout(() => {
+		win.classList.remove('animate__' + intro);
+	}, 1000);
 }
 
 function simplebody(text) {
@@ -100,6 +103,8 @@ function randwin() {
 
 	div.onmouseover = function() {
 		// closeCurrentWindow(div);
+		div.onmouseover = null;
+		count--;
 		removeWindow(div);
 	};
 

@@ -121,7 +121,7 @@
 	content: "▶";
 	position: absolute;
 	transform: scale(0.8, 1) translateY(9px);
-	right: 39px;
+	right: 42px;
 }
 
 .startmenuitem p::first-letter {
