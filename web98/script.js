@@ -218,3 +218,22 @@ function handleDragging(item) {
 
 let items = document.querySelectorAll('.mainwin .window');
 items.forEach(handleDragging);
+
+// ---------
+
+
+function toggleStartmenu() {
+	var startmenu = document.querySelector('.startmenu');
+	if (startmenu.style.display == 'block') {
+		startmenu.classList.add('animate__slideOutDown');
+		setTimeout(() => {
+			startmenu.classList.remove('animate__slideOutDown');
+			startmenu.style.display = 'none';
+			startmenu.style.zIndex = 0;
+		}, 200);
+	} else {
+		startmenu.classList.add('animate__slideInUp');
+		startmenu.style.display = 'block';
+		startmenu.style.zIndex = maxz++;
+	}
+}

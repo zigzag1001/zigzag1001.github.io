@@ -6,6 +6,15 @@
 	--animate-duration: 0.5s;
 }
 
+
+.animate__animated.animate__slideInUp {
+	--animate-duration: 0.2s;
+}
+
+.animate__animated.animate__slideOutDown {
+	--animate-duration: 0.2s;
+}
+
 .mainwin {
 	position: absolute;
 	top: 0;
@@ -41,15 +50,6 @@
 	margin-left: 5px;
 }
 
-/* .start-button { */
-/* 	padding-left: 5px; */
-/* 	position: relative; */
-/* 	bottom: 0; */
-/* 	left: 0; */
-/* 	height: 100%; */
-/* 	min-height: 30px; */
-/* } */
-
 .start-button {
 	padding-left: 7px;
 	padding-right: 5px;
@@ -62,4 +62,69 @@
 
 .start-button:active {
 	transform: translateY(1px);
+}
+
+.startmenucontainer {
+	position: fixed;
+	z-index: 0;
+	bottom: 34px;
+	left: 3px;
+	width: 220px;
+	height: 360px;
+	overflow: hidden;
+}
+
+.startmenu {
+	display: none;
+	position: absolute;
+	width: 96%;
+	height: 98%;
+}
+
+.win98name {
+	position: absolute;
+	transform-origin: 0 0;
+	transform: rotate(-90deg) scale(1.5);
+	bottom: -12px;
+	width: 235px;
+}
+
+.startmenucontent {
+	position: absolute;
+	width: 100%;
+	left: 29px;
+	top: 4px;
+}
+
+.startmenuitem {
+	user-select: none;
+	width: 175px;
+	display: flex;
+	flex-direction: column;
+	font-size: 1.3em;
+	padding-left: 10px;
+}
+
+.startmenuitem:hover {
+	outline: solid 1px black;
+	background-color: darkblue;
+	color: white;
+	cursor: default;
+}
+
+
+.startmenuitem:active {
+	outline: outset 2px black;
+}
+
+.startmenuitem p::after {
+	content: "▶";
+	position: absolute;
+	transform: scale(0.8, 1) translateY(9px);
+	right: 39px;
+}
+
+.startmenuitem p::first-letter {
+	vertical-align: middle;
+	font-size: 1.8em;
 }
