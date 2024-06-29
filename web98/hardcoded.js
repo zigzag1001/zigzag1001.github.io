@@ -46,6 +46,7 @@ function randomWinodws() {
 	}
 
 	var div = createWindow({ body: windowbody });
+	div.classList.add('randwincontrol');
 
 	addWindow(div);
 }

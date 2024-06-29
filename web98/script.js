@@ -62,6 +62,9 @@ function createWindow(opts = {}) {
 }
 
 function addWindow(win, x = 0, y = 0) {
+
+	taskbar(win, 'add');
+
 	if (x == 0 && y == 0) {
 		x = Math.floor(Math.random() * (window.innerWidth - 500));
 		y = Math.floor(Math.random() * (window.innerHeight - 240));
@@ -140,26 +143,67 @@ function customWin() {
 	in_winbody.style.padding = '5px';
 	submit.textContent = 'Submit';
 	submit.onclick = function() {
+		removeWindow(windowbody.closest('.window'));
 		var div = createWindow({
 			title: in_winname.value,
 			body: simplebody(in_winbody.value)
 		});
+		div.classList.add('customwin');
 		var currentwindow = windowbody.closest('.window');
 		var x = currentwindow.getBoundingClientRect().left + parseInt(currentwindow.style.margin.substring(0, currentwindow.style.margin.length - 2));
 		var y = currentwindow.getBoundingClientRect().top + parseInt(currentwindow.style.margin.substring(0, currentwindow.style.margin.length - 2));
 		addWindow(div, x, y);
-		removeWindow(windowbody.closest('.window'));
 	}
 
-	addWindow(createWindow({ body: windowbody, title: 'Create Custom Window' }));
+	var custom = createWindow({ body: windowbody, title: 'Create Custom Window' })
+	custom.classList.add('customwincontrol');
+
+	addWindow(custom);
 }
 
 // Fancy window removal
 function removeWindow(win) {
 	win.classList.add('animate__' + outro);
+	taskbar(win, 'remove');
 	setTimeout(() => {
 		win.remove();
 	}, 1000);
+}
+
+const winbarmap = new Map();
+const openwins = document.querySelector('.open-windows');
+const namemap = {
+	'randwincontrol': '💥AAAAAAA',
+	'customwincontrol': '📁NEW WINDOW',
+	'customwin': '✅CUSTOM WINDOW',
+};
+
+// handles taskbar to window interaction
+function taskbar(win, action) {
+	if (action == 'add') {
+		win.classList.forEach((classname) => {
+			if (classname in namemap) {
+				var winname = namemap[classname];
+				var taskbarbutton = document.createElement('button');
+				taskbarbutton.className = 'taskbar-button';
+				taskbarbutton.textContent = winname;
+				taskbarbutton.onclick = function() {
+					win.style.zIndex = maxz++;
+				}
+
+				// winbarmap[win] = taskbarbutton;
+				winbarmap.set(win, taskbarbutton);
+				openwins.appendChild(taskbarbutton);
+				return;
+			}
+		});
+	} else if (action == 'remove') {
+		if (winbarmap.has(win)) {
+			winbarmap.get(win).remove();
+			winbarmap.delete(win);
+			return;
+		}
+	}
 }
 
 // fill the screen with random windows

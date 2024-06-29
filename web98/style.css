@@ -27,7 +27,7 @@
 	/* align-items: center; */
 }
 
-.toolbar {
+.taskbar {
 	position: fixed;
 	bottom: 0;
 	right: 0;
@@ -63,7 +63,7 @@
 	width: 2px;
 }
 
-.toolbar-button {
+.taskbar-button {
 	margin-left: 5px;
 	height: 100%;
 }
