@@ -39,6 +39,23 @@
 	justify-content: flex-start;
 }
 
+.open-windows {
+	width: 88%;
+}
+
+.clock-tray {
+	user-select: none;
+	cursor: default;
+	outline: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.clock-tray p {
+	margin-top: 5px;
+	padding-left: 10px;
+	padding-right: 20px;
+	font-size: 1.2em;
+}
+
 .vertical-line {
 	margin-left: 2px;
 	background-color: rgba(0, 0, 0, 0.3);
@@ -48,6 +65,7 @@
 
 .toolbar-button {
 	margin-left: 5px;
+	height: 100%;
 }
 
 .start-button {
