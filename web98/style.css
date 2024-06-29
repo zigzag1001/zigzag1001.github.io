@@ -69,6 +69,10 @@
 	height: 100%;
 }
 
+.taskbar-button:hover {
+	background: rgba(0, 0, 0, 0.1)
+}
+
 .start-button {
 	padding-left: 7px;
 	padding-right: 5px;
@@ -84,21 +88,24 @@
 }
 
 .startmenucontainer {
+	pointer-events: none;
 	position: fixed;
 	z-index: 0;
 	bottom: 34px;
 	left: 3px;
-	width: 220px;
-	height: 360px;
+	width: 100%;
+	height: 100%;
 	overflow: hidden;
 	z-index: 99999;
 }
 
 .startmenu {
+	pointer-events: auto;
 	display: none;
 	position: absolute;
-	width: 96%;
-	height: 98%;
+	width: 213px;
+	height: 354px;
+	bottom: 0;
 }
 
 .win98name {
@@ -125,13 +132,17 @@
 	padding-left: 10px;
 }
 
+.submenu {
+	position: absolute;
+	left: 185px;
+}
+
 .startmenuitem:hover {
 	outline: solid 1px black;
 	background-color: darkblue;
 	color: white;
 	cursor: default;
 }
-
 
 .startmenuitem:active {
 	outline: outset 2px black;

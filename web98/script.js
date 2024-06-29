@@ -189,10 +189,12 @@ function maximizeWindow(win) {
 	if (win.style.width == '100%') {
 		win.style.width = win.dataset.width;
 		win.style.height = null;
-		win.style.top = Math.floor(Math.random() * (window.innerHeight - 240)) + 'px';
-		win.style.left = Math.floor(Math.random() * (window.innerWidth - 500)) + 'px';
+		win.style.left = win.dataset.x;
+		win.style.top = win.dataset.y;
 	} else {
 		win.dataset.width = win.style.width;
+		win.dataset.x = win.style.left;
+		win.dataset.y = win.style.top;
 		win.style.top = '-' + win.style.margin;
 		win.style.left = '-' + win.style.margin;
 		win.style.width = '100%';
