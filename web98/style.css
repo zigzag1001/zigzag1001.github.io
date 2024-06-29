@@ -37,6 +37,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
+	z-index: 99998;
 }
 
 .open-windows {
@@ -90,6 +91,7 @@
 	width: 220px;
 	height: 360px;
 	overflow: hidden;
+	z-index: 99999;
 }
 
 .startmenu {

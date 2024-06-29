@@ -36,7 +36,10 @@ function createWindow(opts = {}) {
 	maxbutton.ariaLabel = 'Maximize';
 	closebutton.ariaLabel = 'Close';
 	minbutton.onclick = function() {
-		removeWindow(window_);
+		minimizeWindow(window_);
+	}
+	maxbutton.onclick = function() {
+		maximizeWindow(window_);
 	}
 	closebutton.onclick = function() {
 		removeWindow(window_);
@@ -188,7 +191,7 @@ function taskbar(win, action) {
 				taskbarbutton.className = 'taskbar-button';
 				taskbarbutton.textContent = winname;
 				taskbarbutton.onclick = function() {
-					win.style.zIndex = maxz++;
+					minimizeWindow(win);
 				}
 
 				// winbarmap[win] = taskbarbutton;
@@ -203,6 +206,32 @@ function taskbar(win, action) {
 			winbarmap.delete(win);
 			return;
 		}
+	}
+}
+
+// handles minimizing windows
+function minimizeWindow(win) {
+	if (win.style.display == 'none') {
+		win.style.zIndex = maxz++;
+		win.style.display = 'block';
+	} else {
+		win.style.display = 'none';
+	}
+}
+
+// handles maximizing windows
+function maximizeWindow(win) {
+	if (win.style.width == '100%') {
+		win.style.width = win.dataset.width;
+		win.style.height = null;
+		win.style.top = Math.floor(Math.random() * (window.innerHeight - 240)) + 'px';
+		win.style.left = Math.floor(Math.random() * (window.innerWidth - 500)) + 'px';
+	} else {
+		win.dataset.width = win.style.width;
+		win.style.top = '-' + win.style.margin;
+		win.style.left = '-' + win.style.margin;
+		win.style.width = '100%';
+		win.style.height = '100%';
 	}
 }
 
