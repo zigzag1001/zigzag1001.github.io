@@ -132,11 +132,6 @@
 	padding-left: 10px;
 }
 
-.submenu {
-	position: absolute;
-	left: 185px;
-}
-
 .startmenuitem:hover {
 	outline: solid 1px black;
 	background-color: darkblue;
