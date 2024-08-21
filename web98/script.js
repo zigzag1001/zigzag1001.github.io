@@ -89,7 +89,11 @@ function simplebody(text) {
 	windowbody.className = 'window-body';
 	windowbody.appendChild(document.createElement('p')).textContent = text;
 
-	windowbody.appendChild(document.createElement('button')).textContent = 'OK';
+	var okbutton = windowbody.appendChild(document.createElement('button'));
+	okbutton.textContent = 'OK';
+	okbutton.onclick = function() {
+		randwin();
+	}
 
 	var cancelbutton = windowbody.appendChild(document.createElement('button'));
 	cancelbutton.textContent = 'Cancel';
