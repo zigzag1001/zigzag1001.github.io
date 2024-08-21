@@ -27,6 +27,23 @@
 	/* align-items: center; */
 }
 
+.desktop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 97%;
+	width: 100%;
+	background: #008080;
+	z-index: 0;
+}
+
+.square {
+	background: lightblue;
+	opacity: 0.8;
+	z-index: 1;
+	position: absolute;
+}
+
 .taskbar {
 	position: fixed;
 	bottom: 0;

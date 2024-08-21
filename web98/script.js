@@ -230,6 +230,7 @@ function clearWins(classname, except = 'norem') {
 
 function closeAll() {
 	clearWins('window');
+	maxz = 50;
 }
 
 // MOVEABLE WINDOWS
@@ -282,3 +283,37 @@ function toggleStartmenu() {
 		startmenu.style.zIndex = maxz++;
 	}
 }
+
+
+function desktopSelectSquare() {
+	var desktop = document.querySelector('.desktop');
+	desktop.addEventListener('mousedown', (e) => {
+		let x = e.clientX;
+		let y = e.clientY;
+		let square = document.createElement('div');
+		square.className = 'square';
+		square.style.left = x + 'px';
+		square.style.top = y + 'px';
+		desktop.appendChild(square);
+		desktop.addEventListener('mousemove', (e) => {
+			let width = e.clientX - x;
+			let height = e.clientY - y;
+			if (width < 0) {
+				square.style.left = e.clientX + 'px';
+				width = -width;
+			}
+			if (height < 0) {
+				square.style.top = e.clientY + 'px';
+				height = -height;
+			}
+			square.style.width = width + 'px';
+			square.style.height = height + 'px';
+		});
+		desktop.addEventListener('mouseup', () => {
+			square.remove();
+			desktop.removeEventListener('mousemove', () => { });
+			desktop.removeEventListener('mouseup', () => { });
+		});
+	});
+}
+desktopSelectSquare();
